@@ -24,7 +24,6 @@ import com.aurora.backend.dto.UnitOutDTO;
 import com.aurora.backend.model.Unit;
 import com.aurora.backend.service.IUnitService;
 
-
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("units")
