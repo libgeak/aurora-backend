@@ -60,7 +60,6 @@ public class UnitRestController extends CustomAbstractRestController {
 			return this.responseReturnOK(mapResponse);		
 		}catch(Exception ex) {
 			return this.managerException(mapResponse, ex, logger);
-	
 		}
 		
 	}
