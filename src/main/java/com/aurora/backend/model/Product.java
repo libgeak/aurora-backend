@@ -29,6 +29,7 @@ public class Product implements Serializable {
 	@Id
 	@GeneratedValue(generator = "system-uuid")
 	@GenericGenerator(name ="system-uuid", strategy = "uuid2")
+	@Column(name = "id", columnDefinition = "BINARY(16)")
 	private UUID id;
 	
 	private String name;
