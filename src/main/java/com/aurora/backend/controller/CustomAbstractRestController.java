@@ -45,7 +45,8 @@ public abstract class CustomAbstractRestController {
 		
 		if(ex instanceof CustomException) {			
 			CustomException exception = ((CustomException) ex); 
-			this.responseAddErrorResponse(mapResponse, exception .getCustomExceptionEnum().getValue());
+			//this.responseAddErrorResponse(mapResponse, exception.getCustomExceptionEnum().getValue());
+			this.responseAddErrorResponse(mapResponse, exception.getUserMessage());
 			this.responseAddMessage(mapResponse, exception.getUserMessage());
 			return new ResponseEntity<Map<String, Object>>(mapResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 		} else {
