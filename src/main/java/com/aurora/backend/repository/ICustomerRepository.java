@@ -7,10 +7,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.aurora.backend.model.Customer;
-import com.aurora.backend.model.Product;
-@Repository
-public interface IProductRepository  extends JpaRepository<Product, UUID>{
 
-	public List<Product> findAllByNameContainingIgnoreCase(String name);
+@Repository
+public interface ICustomerRepository extends JpaRepository<Customer, UUID> {
+	
+	public List<Customer> findAllByFullnameContainingIgnoreCase(String name);
+	
+	
 
 }

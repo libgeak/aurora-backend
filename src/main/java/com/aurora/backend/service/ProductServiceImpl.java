@@ -6,6 +6,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.aurora.backend.model.Customer;
 import com.aurora.backend.model.Product;
 import com.aurora.backend.repository.IProductRepository;
 
@@ -31,9 +32,8 @@ public class ProductServiceImpl implements IProductService {
 	}
 
 	@Override
-	public Product findByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Product> findAllByParams(String name) {		
+		return productRepository.findAllByNameContainingIgnoreCase(name);
 	}
 
 }

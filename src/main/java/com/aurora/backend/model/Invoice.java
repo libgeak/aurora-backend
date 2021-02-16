@@ -11,7 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -22,35 +21,25 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="products")
-public class Product implements Serializable, ICustomEntity {
+@Table(name="invoices")
+public class Invoice implements Serializable, ICustomEntity {
 
 	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(generator = "system-uuid")
 	@GenericGenerator(name ="system-uuid", strategy = "uuid2")
 	@Column(name = "id", columnDefinition = "BINARY(16)")
-	private UUID id;
+	private UUID id;	
 	
-	private String name;
-	
-	@Column(name = "unit_value")
-	private double unitValue;
-	
-	@Column(name ="updated_at")
+	@Column(name ="created_at")
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date updatedAt;
+	private Date createdAt;
+		
+	private double total;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="units_id")
-	private Unit unit;
-	
-	private String state;
-	
-	@PrePersist
-	public void prePersist() {
-		//this.id = UUID.randomUUID();
-		this.updatedAt = new Date();
-	}
-		
+	@JoinColumn(name="customers_id")
+	private Customer customer;
+
 }

@@ -20,33 +20,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.aurora.backend.dto.CustomerInDTO;
-import com.aurora.backend.dto.ProductInDTO;
-import com.aurora.backend.dto.ProductOutDTO;
-import com.aurora.backend.model.Product;
-import com.aurora.backend.service.IProductService;
+import com.aurora.backend.model.Customer;
+import com.aurora.backend.service.ICustomerService;
 import com.aurora.backend.service.IUnitService;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("products")
-public class ProductRestController extends CustomAbstractRestController {
+@RequestMapping("customers")
+public class CustomerRestController extends CustomAbstractRestController {
 	
-	private Logger logger = LoggerFactory.getLogger(ProductRestController.class);
-	
-	@Autowired
-	private IProductService productService; 
+	private Logger logger = LoggerFactory.getLogger(CustomerRestController.class);
 	
 	@Autowired
-	private IUnitService unitService; 
+	private ICustomerService customerService; 
 	
 	@PostMapping("/create")
-	public ResponseEntity<?> create(@RequestBody ProductInDTO productDTO) {
+	public ResponseEntity<?> create(@RequestBody CustomerInDTO customerDTO) {
 		Map<String, Object> mapResponse = new HashMap<String, Object>();	
 		try {
-			Product product = this.convertToEntity(productDTO);
-			product = productService.save(product);
+			Customer customer = this.convertToEntity(customerDTO);
+			customer = customerService.save(customer);
 			
-			this.responseAddObject(mapResponse, this.convertToDto(product));
+			this.responseAddObject(mapResponse, this.convertToDto(customer));
 			return this.responseReturnOKWithMessageDefault(mapResponse);			
 		}catch(Exception ex) {
 			return this.managerException(mapResponse, ex, logger);
@@ -55,12 +50,12 @@ public class ProductRestController extends CustomAbstractRestController {
 	}
 	
 	@GetMapping("/search/{id}")
-	public ResponseEntity<?> getProduct(@PathVariable("id") UUID id){
+	public ResponseEntity<?> getcustomer(@PathVariable("id") UUID id){
 		Map<String, Object> mapResponse = new HashMap<String, Object>();
 		try {
-			Product product = productService.findById(id);
+			Customer customer = customerService.findById(id);
 			
-			this.responseAddObject(mapResponse, this.convertToDto(product));
+			this.responseAddObject(mapResponse, this.convertToDto(customer));
 			return this.responseReturnOK(mapResponse);			
 		}catch(Exception ex) {
 			return this.managerException(mapResponse, ex, logger);
@@ -69,13 +64,13 @@ public class ProductRestController extends CustomAbstractRestController {
 	}
 	
 	@PutMapping("/create")
-	public ResponseEntity<?> updateProduct(@RequestBody ProductInDTO productDTO) {
+	public ResponseEntity<?> updatecustomer(@RequestBody CustomerInDTO customerDTO) {
 		Map<String, Object> mapResponse = new HashMap<String, Object>();	
 		try {
-			Product product = this.convertToEntity(productDTO);
-			product = productService.save(product);
+			Customer customer = this.convertToEntity(customerDTO);
+			customer = customerService.save(customer);
 			
-			this.responseAddObject(mapResponse, this.convertToDto(product));
+			this.responseAddObject(mapResponse, this.convertToDto(customer));
 			return this.responseReturnOKWithMessageDefault(mapResponse);			
 		}catch(Exception ex) {
 			return this.managerException(mapResponse, ex, logger);
@@ -83,10 +78,10 @@ public class ProductRestController extends CustomAbstractRestController {
 	}
 	
 	@GetMapping("/list")
-	public ResponseEntity<?> listProducts() {
+	public ResponseEntity<?> listcustomers() {
 		Map<String, Object> mapResponse = new HashMap<String, Object>();	
 		try {
-			List<ProductOutDTO> listUnits =  productService
+			List<CustomerInDTO> listUnits =  customerService
 					.findAll()
 					.stream()
 					.map(this::convertToDto)
@@ -105,8 +100,8 @@ public class ProductRestController extends CustomAbstractRestController {
 	public ResponseEntity<?> getcustomer(@PathVariable("name") String name){
 		Map<String, Object> mapResponse = new HashMap<String, Object>();
 		try {
-			List<ProductOutDTO> customers = 
-					productService.findAllByParams(name)
+			List<CustomerInDTO> customers = 
+					customerService.findAllByParams(name)
 					.stream()
 					.map(this::convertToDto)
 					.collect(Collectors.toList());
@@ -119,14 +114,16 @@ public class ProductRestController extends CustomAbstractRestController {
 
 	}
 	
-	private ProductOutDTO convertToDto(Product product) {
-		return modelMapper.map(product, ProductOutDTO.class);
+	private CustomerInDTO convertToDto(Customer customer) {
+		return modelMapper.map(customer, CustomerInDTO.class);
 	}
 	
-	private Product convertToEntity(ProductInDTO dto) {
-		Product product = modelMapper.map(dto, Product.class);
-		product.setUnit(unitService.findById(dto.getIdUnit()));
+	private Customer convertToEntity(CustomerInDTO dto) {
+		Customer customer = modelMapper.map(dto, Customer.class);
 		
-		return product;
+		return customer;
 	}
+	
+	
+
 }
