@@ -1,4 +1,4 @@
-package com.aurora.backend.service;
+package com.aurora.backend.service.impl;
 
 import java.util.List;
 import java.util.UUID;
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.aurora.backend.model.Customer;
 import com.aurora.backend.repository.ICustomerRepository;
+import com.aurora.backend.service.ICustomerService;
 
 @Service
 public class CustomerServiceImpl implements ICustomerService {

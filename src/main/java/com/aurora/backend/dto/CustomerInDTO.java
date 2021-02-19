@@ -5,7 +5,7 @@ import java.util.UUID;
 import lombok.Data;
 
 @Data
-public class CustomerInDTO implements ICustomDTO{
+public class CustomerInDTO implements ICustomDTO {
 	
 private UUID id;
 	

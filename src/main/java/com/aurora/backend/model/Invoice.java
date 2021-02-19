@@ -1,6 +1,8 @@
 package com.aurora.backend.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.UUID;
 
@@ -11,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -42,4 +45,9 @@ public class Invoice implements Serializable, ICustomEntity {
 	@JoinColumn(name="customers_id")
 	private Customer customer;
 
+	
+	@PrePersist
+	public void prePersist() {
+		this.createdAt = new Date();
+	}
 }

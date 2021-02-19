@@ -1,4 +1,4 @@
-package com.aurora.backend.service;
+package com.aurora.backend.service.impl;
 
 import java.util.List;
 import java.util.UUID;
@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.aurora.backend.model.Customer;
 import com.aurora.backend.model.Product;
 import com.aurora.backend.repository.IProductRepository;
+import com.aurora.backend.service.IProductService;
 
 @Service
 public class ProductServiceImpl implements IProductService {

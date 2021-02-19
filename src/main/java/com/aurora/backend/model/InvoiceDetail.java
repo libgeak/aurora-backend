@@ -20,7 +20,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name="invoice_details")
-public class InvoiceDetails implements Serializable, ICustomEntity {
+public class InvoiceDetail implements Serializable, ICustomEntity {
 	
 	private static final long serialVersionUID = 1L;
 

@@ -6,10 +6,11 @@ import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.aurora.backend.model.Product;
-@Repository
-public interface IProductRepository  extends JpaRepository<Product, UUID>{
+import com.aurora.backend.model.InvoiceDetail;
 
-	public List<Product> findAllByNameContainingIgnoreCase(String name);
+@Repository
+public interface IInvoiceDetailRepository extends JpaRepository<InvoiceDetail, UUID>{
+	
+	public List<InvoiceDetail> findAllByInvoiceId(UUID id);
 
 }
