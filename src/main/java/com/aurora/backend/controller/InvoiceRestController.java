@@ -1,5 +1,8 @@
 package com.aurora.backend.controller;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.aurora.backend.dto.InvoiceDetailInDTO;
 import com.aurora.backend.dto.InvoiceInDTO;
 import com.aurora.backend.dto.WrapperInvoiceInDTO;
+import com.aurora.backend.enums.CustomExceptionKeyEnum;
 import com.aurora.backend.model.Invoice;
 import com.aurora.backend.model.InvoiceDetail;
 import com.aurora.backend.service.IInvoiceDetailService;
@@ -99,6 +103,26 @@ public class InvoiceRestController  extends CustomAbstractRestController{
 			
 			this.responseAddObject(mapResponse, invoicesDTO);
 			
+			return this.responseReturnOKWithMessageDefault(mapResponse);			
+		}catch(Exception ex) {
+			return this.managerException(mapResponse, ex, logger);
+		}
+ 
+	}
+	
+	@GetMapping("/sumTotalInvoice")
+	public ResponseEntity<?> sumTotalInvoice() {
+		Map<String, Object> mapResponse = new HashMap<String, Object>();	
+		try {
+			SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd");
+			;
+			
+			Double total = invoiceService.sumTotalInvoicesByDate(simpleDate.parse(LocalDate.now().toString()));
+			if(total == null) {
+				total = Double.valueOf(0);
+			}
+					 
+			mapResponse.put(CustomExceptionKeyEnum.RESULT.toString(), total);						
 			return this.responseReturnOKWithMessageDefault(mapResponse);			
 		}catch(Exception ex) {
 			return this.managerException(mapResponse, ex, logger);

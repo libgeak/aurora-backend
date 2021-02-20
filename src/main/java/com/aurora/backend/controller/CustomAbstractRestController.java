@@ -65,6 +65,7 @@ public abstract class CustomAbstractRestController {
 		map.put(CustomExceptionKeyEnum.RESULT.toString(), customDTO);
 	}
 	
+	
 	/**
 	 * Metodo para agregar un objeto de éxito a la respuesta de guardar archivo
 	 * que se enviara al front.

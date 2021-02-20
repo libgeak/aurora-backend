@@ -1,9 +1,9 @@
 package com.aurora.backend.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import com.aurora.backend.model.Customer;
 import com.aurora.backend.model.Invoice;
 import com.aurora.backend.model.InvoiceDetail;
 
@@ -14,6 +14,8 @@ public interface IInvoiceService {
 	public Invoice saveAll(Invoice invoice, List<InvoiceDetail> invoiceDetail);
 	
 	public List<Invoice> findAllByCustomerById(UUID id);
+	
+	public Double sumTotalInvoicesByDate(Date date);
 
 
 

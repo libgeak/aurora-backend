@@ -1,5 +1,6 @@
 package com.aurora.backend.service.impl;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -52,6 +53,13 @@ public class InvoiceServiceImpl implements IInvoiceService {
 	@Override
 	public List<Invoice> findAllByCustomerById(UUID id) {		
 		return invoiceRepository.findAllByCustomerId(id);
+	}
+
+
+	@Override
+	public Double sumTotalInvoicesByDate(Date date) {		
+		
+		return invoiceRepository.sumTotalInvoicesByDate(date);
 	}
 	
 	
